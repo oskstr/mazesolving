@@ -90,21 +90,21 @@ class Maze(object):
                                 n = Maze.Node((y, x))
 
 			# If node isn't none, we can assume we can connect N-S somewhere
-                        if n != None:
-			    # Clear above, connect to waiting top node
-                            if data[rowaboveoffset + x] > 0:
-                                t = topnodes[x]
-                                t.neighbours[2] = n
-                                n.neighbours[0] = t
+                    if n != None:
+			# Clear above, connect to waiting top node
+                        if data[rowaboveoffset + x] > 0:
+                            t = topnodes[x]
+                            t.neighbours[2] = n
+                            n.neighbours[0] = t
 
-                                # If clear below, put this new node in the
-                                # top row for the next connection
-                                if data[rowbelowoffset + x] > 0:
-                                    topnodes[x] = n
-                                else:
-                                    topnodes[x] = None
+                        # If clear below, put this new node in the
+                        # top row for the next connection
+                        if data[rowbelowoffset + x] > 0:
+                            topnodes[x] = n
+                        else:
+                            topnodes[x] = None
 
-                                count += 1
+                        count += 1
 
             # End row
             rowoffset = (height - 1) * width
