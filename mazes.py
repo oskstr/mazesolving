@@ -1,8 +1,10 @@
-""" Module docstring placeholder """
+""" Creates a maze object with a map of nodes
+    in all corners and junctions. """
 class Maze(object):
-    """ Class docstring placeholder """
+    """ Imports image and creates a map with
+        with nodes in all corners and junctions. """
     class Node(object):
-        """ Class docstring placeholder """
+        """ Creates a new node. """
         def __init__(self, position):
             self.position = position
             self.neighbours = [None, None, None, None]
