@@ -6,7 +6,6 @@ def solve(maze):
     """ Function docstring placeholder """
     start = maze.start
     end = maze.end
-
     width = maze.width
 
     queue = deque([start])
@@ -36,10 +35,10 @@ def solve(maze):
                     visited[npos] = True
                     prev[npos] = current
 
-        path = deque()
-        current = end
-        while current != None:
-            path.appendleft(current)
-            current = prev[current.position[0] * width + current.position[1]]
+    path = deque()
+    current = end
+    while current != None:
+        path.appendleft(current)
+        current = prev[current.position[0] * width + current.position[1]]
 
-        return [path, [count, len(path), completed]]
+    return [path, [count, len(path), completed]]

@@ -23,7 +23,7 @@ PARSER.add_argument("input_file")
 PARSER.add_argument("output_file")
 ARGS = PARSER.parse_args()
 
-METHOD = ARGS.method   # Never used?
+METHOD = ARGS.method
 
 # Load Image
 print ("Loading Image")
@@ -40,7 +40,7 @@ TOTAL = TIME_1-TIME_0
 print ("Time elapsed:", TOTAL, "\n")
 
 # Create and run solver
-[TITLE, SOLVER] = SF.createsolver(ARGS.method)
+[TITLE, SOLVER] = SF.createsolver(METHOD)
 print ("Starting Solve:", TITLE)
 
 TIME_0 = time.time()

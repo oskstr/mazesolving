@@ -31,7 +31,7 @@ class Maze(object):
 
         for y in range(1, height - 1):
             # Uncomment next line to keep a track of row progress
-            #print ("row", str(y))
+            # print ("row", str(y))
 
             rowoffset = y * width
             rowaboveoffset = rowoffset - width
