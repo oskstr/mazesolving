@@ -5,6 +5,8 @@ Line colour is roughly interpolated between blue and red depending
 on how far down the path this section is. Dependency on numpy
 should be easy to remove at some point. """
 
+# pylint: disable=C0325, E1101
+
 import numpy as np
 from PIL import Image
 import time
@@ -15,8 +17,8 @@ from factory import SolverFactory
 import argparse
 SF = SolverFactory()
 PARSER = argparse.ArgumentParser()
-PARSER.add_argument("-m", "--method", nargs='?', const=SF.Default,
-                    default=SF.Default, choices=SF.Choices)
+PARSER.add_argument("-m", "--method", nargs='?', const=SF.default,
+                    default=SF.default, choices=SF.choices)
 PARSER.add_argument("input_file")
 PARSER.add_argument("output_file")
 ARGS = PARSER.parse_args()

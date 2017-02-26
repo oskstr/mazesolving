@@ -11,9 +11,9 @@ def solve(maze):
     total = maze.width * maze.height
 
     start = maze.start
-    startpos = start.Position # Unused variable?
+    startpos = start.position # Unused variable?
     end = maze.end
-    endpos = end.Position
+    endpos = end.position
 
     visited = [False] * total
     prev = [None] * total
@@ -25,9 +25,9 @@ def solve(maze):
 
     nodeindex = [None] * total
 
-    distances[start.Position[0] * width + start.Position[1]] = 0
+    distances[start.position[0] * width + start.position[1]] = 0
     startnode = FibHeap.Node(0, start)
-    nodeindex[start.Position[0] * width + start.Position[1]] = startnode
+    nodeindex[start.position[0] * width + start.position[1]] = startnode
     unvisited.insert(startnode)
 
     count = 0
@@ -40,7 +40,7 @@ def solve(maze):
         unvisited.removeminimum()
 
         u = n.value
-        upos = u.Position
+        upos = u.position
         uposindex = upos[0] * width + upos[1]
 
         if distances[uposindex] == infinity:
@@ -50,9 +50,9 @@ def solve(maze):
             completed = True
             break
 
-        for v in u.Neighbours:
+        for v in u.neighbours:
             if v != None:
-                vpos = v.Position
+                vpos = v.position
                 vposindex = vpos[0] * width + vpos[1]
 
                 if visited[vposindex] == False:
@@ -108,6 +108,6 @@ def solve(maze):
     current = end
     while current != None:
         path.appendleft(current)
-        current = prev[current.Position[0] * width + current.Position[1]]
+        current = prev[current.position[0] * width + current.position[1]]
 
     return [path, [count, len(path), completed]]

@@ -10,7 +10,7 @@ def solve(maze):
     width = maze.width
 
     queue = deque([start])
-    shape = (maze.height, maze.width) # Unused variable!
+    # shape = (maze.height, maze.width) # Unused variable!
     prev = [None] * (maze.width * maze.height)
     visited = [False] * (maze.width * maze.height)
 
