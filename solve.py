@@ -1,3 +1,10 @@
+""" Create and save the output image.
+This is simple drawing code that travels between each node in turn,
+drawing either a horizontal or vertical line as required.
+Line colour is roughly interpolated between blue and red depending
+on how far down the path this section is. Dependency on numpy
+should be easy to remove at some point. """
+
 import numpy as np
 from PIL import Image
 import time
@@ -6,84 +13,79 @@ from factory import SolverFactory
 
 # Read command line arguments - the python argparse class is convenient here.
 import argparse
-sf = SolverFactory()
-parser = argparse.ArgumentParser()
-parser.add_argument("-m", "--method", nargs='?', const=sf.Default, default=sf.Default,
-						choices=sf.Choices)
-parser.add_argument("input_file")
-parser.add_argument("output_file")
-args = parser.parse_args()
+SF = SolverFactory()
+PARSER = argparse.ArgumentParser()
+PARSER.add_argument("-m", "--method", nargs='?', const=SF.Default,
+                    default=SF.Default, choices=SF.Choices)
+PARSER.add_argument("input_file")
+PARSER.add_argument("output_file")
+ARGS = PARSER.parse_args()
 
-method = args.method
+METHOD = ARGS.method   # Never used?
 
 # Load Image
 print ("Loading Image")
-im = Image.open(args.input_file)
+IMAGE_IN = Image.open(ARGS.input_file)
 
-# Create the maze (and time it) - for many mazes this is more time consuming than solving the maze
+# Create the maze (and time it)
+# - for many mazes this is more time consuming than solving the maze
 print ("Creating Maze")
-t0 = time.time()
-maze = Maze(im)
-t1 = time.time()
-print ("Node Count:", maze.count)
-total = t1-t0
-print ("Time elapsed:", total, "\n")
+TIME_0 = time.time()
+MAZE = Maze(IMAGE_IN)
+TIME_1 = time.time()
+print ("Node Count:", MAZE.count)
+TOTAL = TIME_1-TIME_0
+print ("Time elapsed:", TOTAL, "\n")
 
 # Create and run solver
-[title, solver] = sf.createsolver(args.method)
-print ("Starting Solve:", title)
+[TITLE, SOLVER] = SF.createsolver(ARGS.method)
+print ("Starting Solve:", TITLE)
 
-t0 = time.time()
-[result, stats] = solver(maze)
-t1 = time.time()
+TIME_0 = time.time()
+[RESULT, STATS] = SOLVER(MAZE)
+TIME_1 = time.time()
 
-total = t1-t0
+TOTAL = TIME_1-TIME_0
 
 # Print solve stats
-print ("Nodes explored: ", stats[0])
-if (stats[2]):
-	print ("Path found, length", stats[1])
+print ("Nodes explored: ", STATS[0])
+if (STATS[2]):
+    print ("Path found, length", STATS[1])
 else:
-	print ("No Path Found")
-print ("Time elapsed: ", total, "\n")
+    print ("No Path Found")
+print ("Time elapsed: ", TOTAL, "\n")
 
-"""
-Create and save the output image.
-This is simple drawing code that travels between each node in turn, drawing either
-a horizontal or vertical line as required. Line colour is roughly interpolated between
-blue and red depending on how far down the path this section is. Dependency on numpy
-should be easy to remove at some point.
-"""
+
 
 print ("Saving Image")
-mazeimage = np.array(im)
-imout = np.array(mazeimage)
-imout[imout==1] = 255
-out = imout[:,:,np.newaxis]
+MAZE_IMAGE = np.array(IMAGE_IN)
+IMAGE_OUT = np.array(MAZE_IMAGE)
+IMAGE_OUT[IMAGE_OUT == 1] = 255
+OUT = IMAGE_OUT[:, :, np.newaxis]
 
-out = np.repeat(out, 3, axis=2)
+OUT = np.repeat(OUT, 3, axis=2)
 
-resultpath = [n.Position for n in result]
+RESULT_PATH = [n.position for n in RESULT]
 
-length = len(resultpath)
+LENGTH = len(RESULT_PATH)
 
-px = [0, 0, 0]
-for i in range(0, length - 1):
-	a = resultpath[i]
-	b = resultpath[i+1]
+PIXEL = [0, 0, 0]
+for i in range(0, LENGTH - 1):
+    a = RESULT_PATH[i]
+    b = RESULT_PATH[i+1]
 
-	# Blue - red
-	px[0] = int((i / length) * 255)
-	px[2] = 255 - px[0]
+    # Blue - red
+    PIXEL[0] = int((i / LENGTH) * 255)
+    PIXEL[2] = 255 - PIXEL[0]
 
-	if a[0] == b[0]:
-		# Ys equal - horizontal line
-		for x in range(min(a[1],b[1]), max(a[1],b[1])):
-			out[a[0],x,:] = px
-	elif a[1] == b[1]:
-		# Xs equal - vertical line
-		for y in range(min(a[0],b[0]), max(a[0],b[0]) + 1):
-			out[y,a[1],:] = px
+    if a[0] == b[0]:
+	# Ys equal - horizontal line
+        for x in range(min(a[1], b[1]), max(a[1], b[1])):
+            OUT[a[0], x, :] = PIXEL
+    elif a[1] == b[1]:
+	# Xs equal - vertical line
+        for y in range(min(a[0], b[0]), max(a[0], b[0]) + 1):
+            OUT[y, a[1], :] = PIXEL
 
-img = Image.fromarray(out)
-img.save(args.output_file)
+IMAGE = Image.fromarray(OUT)
+IMAGE.save(ARGS.output_file)
