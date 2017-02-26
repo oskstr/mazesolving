@@ -68,54 +68,54 @@ class Maze(object):
                             leftnode.neighbours[1] = n
                             n.neighbours[3] = leftnode
                             leftnode = n
-                        else:
-                            # PATH PATH WALL
-                            # Create path at end of corridor
-                            n = Maze.Node((y, x))
-                            leftnode.neighbours[1] = n
-                            n.neighbours[3] = leftnode
-                            leftnode = None
                     else:
-                        if nxt == True:
-                            # WALL PATH PATH
-                            # Create path at start of corridor
+                        # PATH PATH WALL
+                        # Create path at end of corridor
+                        n = Maze.Node((y, x))
+                        leftnode.neighbours[1] = n
+                        n.neighbours[3] = leftnode
+                        leftnode = None
+                else:
+                    if nxt == True:
+                        # WALL PATH PATH
+                        # Create path at start of corridor
+                        n = Maze.Node((y, x))
+                        leftnode = n
+                    else:
+                        # WALL PATH WALL
+                        # Create node only if in dead end
+                        if (data[rowaboveoffset + x] == 0) or \
+                           (data[rowbelowoffset + x] == 0):
+                            #print ("Create Node in dead end")
                             n = Maze.Node((y, x))
-                            leftnode = n
-                        else:
-                            # WALL PATH WALL
-                            # Create node only if in dead end
-                            if (data[rowaboveoffset + x] == 0) or \
-                               (data[rowbelowoffset + x] == 0):
-                                #print ("Create Node in dead end")
-                                n = Maze.Node((y, x))
 
-			# If node isn't none, we can assume we can connect N-S somewhere
-                    if n != None:
-			# Clear above, connect to waiting top node
-                        if data[rowaboveoffset + x] > 0:
-                            t = topnodes[x]
-                            t.neighbours[2] = n
-                            n.neighbours[0] = t
+		# If node isn't none, we can assume we can connect N-S somewhere
+                if n != None:
+		    # Clear above, connect to waiting top node
+                    if data[rowaboveoffset + x] > 0:
+                        t = topnodes[x]
+                        t.neighbours[2] = n
+                        n.neighbours[0] = t
 
-                        # If clear below, put this new node in the
-                        # top row for the next connection
-                        if data[rowbelowoffset + x] > 0:
-                            topnodes[x] = n
-                        else:
-                            topnodes[x] = None
+                    # If clear below, put this new node in the
+                    # top row for the next connection
+                    if data[rowbelowoffset + x] > 0:
+                        topnodes[x] = n
+                    else:
+                        topnodes[x] = None
 
-                        count += 1
-
-            # End row
-            rowoffset = (height - 1) * width
-            for x in range(1, width - 1):
-                if data[rowoffset + x] > 0:
-                    self.end = Maze.Node((height - 1, x))
-                    t = topnodes[x]
-                    t.neighbours[2] = self.end
-                    self.end.neighbours[0] = t
                     count += 1
 
-            self.count = count
-            self.width = width
-            self.height = height
+        # End row
+        rowoffset = (height - 1) * width
+        for x in range(1, width - 1):
+            if data[rowoffset + x] > 0:
+                self.end = Maze.Node((height - 1, x))
+                t = topnodes[x]
+                t.neighbours[2] = self.end
+                self.end.neighbours[0] = t
+                count += 1
+
+        self.count = count
+        self.width = width
+        self.height = height
