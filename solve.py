@@ -2,12 +2,10 @@
 This is simple drawing code that travels between each node in turn,
 drawing either a horizontal or vertical line as required.
 Line colour is roughly interpolated between blue and red depending
-on how far down the path this section is. Dependency on numpy
-should be easy to remove at some point. """
+on how far down the path this section is. """
 
 # pylint: disable=C0325, E1101
 
-import numpy as np # Unused import
 from PIL import Image
 import time
 from mazes import Maze
@@ -17,7 +15,8 @@ from factory import SolverFactory
 import argparse
 
 def solve(factory, method, input_file, output_file):
-    """ Function docstring placeholder """
+    """ Solves as maze.
+    Finds a path for a maze from top to bottom."""
     # Load Image
     print("Loading Image")
     image = Image.open(input_file)
@@ -79,7 +78,8 @@ def solve(factory, method, input_file, output_file):
 
 
 def main():
-    """ Function docstring placeholder """
+    """ Parses arguments of solve.py and chooses method.
+    Breath-first by default. """
     sf = SolverFactory()
     parser = argparse.ArgumentParser()
     parser.add_argument("-m", "--method", nargs='?', const=sf.default,
