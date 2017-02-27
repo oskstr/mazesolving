@@ -1,5 +1,6 @@
 """ Module docstring placeholder """
 from FibonacciHeap import FibHeap
+from priority_queue import FibPQ, HeapPQ, QueuePQ
 
 # This implementatoin of A* is almost identical to the Dijkstra implementation.
 # So for clarity I've removed all comments, and only added those
@@ -21,7 +22,11 @@ def solve(maze):
     infinity = float("inf")
     distances = [infinity] * total
 
-    unvisited = FibHeap()
+    # The priority queue. There are multiple implementations in priority_queue.py
+    # unvisited = FibHeap()
+    unvisited = HeapPQ()
+    # unvisited = FibPQ()
+    # unvisited = QueuePQ()
 
     nodeindex = [None] * total
 
@@ -33,11 +38,10 @@ def solve(maze):
     count = 0
     completed = False
 
-    while unvisited.count > 0:
+    while len(unvisited) > 0:
         count += 1
 
-        n = unvisited.minimum()
-        unvisited.removeminimum()
+        n = unvisited.removeminimum()
 
         u = n.value
         upos = u.position
@@ -87,15 +91,13 @@ def solve(maze):
                             vnode = FibHeap.Node(newdistance + remaining, v)
                             unvisited.insert(vnode)
                             nodeindex[vposindex] = vnode
-			    # The distance *to* the node remains just g, no f included.
+                            # The distance *to* the node remains just g, no f included.
                             distances[vposindex] = newdistance
                             prev[vposindex] = u
                         else:
-			# As above, we decrease the node since we've found a new path.
-                        # But we include the f cost, the distance remaining.
-                            unvisited.decreasekey(vnode, newdistance \
-                                                  + remaining)
-			    # The distance *to* the node remains just g, no f included.
+                            # As above, we decrease the node since we've found a new path. But we include the f cost, the distance remaining.
+                            unvisited.decreasekey(vnode, newdistance + remaining)
+                            # The distance *to* the node remains just g, no f included.
                             distances[vposindex] = newdistance
                             prev[vposindex] = u
 

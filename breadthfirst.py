@@ -6,6 +6,7 @@ def solve(maze):
     """ Function docstring placeholder """
     start = maze.start
     end = maze.end
+
     width = maze.width
 
     queue = deque([start])

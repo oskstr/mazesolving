@@ -1,5 +1,6 @@
 """ Module docstring placeholder """
 from FibonacciHeap import FibHeap
+from priority_queue import FibPQ, HeapPQ, QueuePQ
 
 def solve(maze):
     """ Function docstring placeholder """
@@ -28,8 +29,11 @@ def solve(maze):
     infinity = float("inf")
     distances = [infinity] * total
 
-    # The priority queue. We are using a Fibonacci heap in this case.
-    unvisited = FibHeap()
+    # The priority queue. There are multiple implementations in priority_queue.py
+    # unvisited = FibHeap()
+    unvisited = HeapPQ()
+    # unvisited = FibPQ()
+    # unvisited = QueuePQ()
 
     # This index holds all priority queue nodes as they are created.
     # We use this to decrease the key of a specific node when a
@@ -49,12 +53,11 @@ def solve(maze):
     completed = False
 
     # Begin Dijkstra - continue while there are unvisited nodes in the queue
-    while unvisited.count > 0:
+    while len(unvisited) > 0:
         count += 1
 
         # Find current shortest path point to explore
-        n = unvisited.minimum()
-        unvisited.removeminimum()
+        n = unvisited.removeminimum()
 
         # Current node u, all neighbours will be v
         u = n.value
@@ -80,13 +83,13 @@ def solve(maze):
 		# https://en.wikipedia.org/wiki/Taxicab_geometry
                     d = abs(vpos[0] - upos[0]) + abs(vpos[1] - upos[1])
 
-		    # New path cost to v is distance to u + extra
+                    # New path cost to v is distance to u + extra
                     newdistance = distances[uposindex] + d
 
-		    # If this new distance is the new shortest path to v
+                    # If this new distance is the new shortest path to v
                     if newdistance < distances[vposindex]:
                         vnode = nodeindex[vposindex]
-			# v isn't already in the priority queue - add it
+                        # v isn't already in the priority queue - add it
                         if vnode == None:
                             vnode = FibHeap.Node(newdistance, v)
                             unvisited.insert(vnode)

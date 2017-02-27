@@ -23,8 +23,8 @@ def solve(maze):
 
         visited[current.position[0] * width + current.position[1]] = True
 
-	#import code
-	#code.interact(local=locals())
+        #import code
+        #code.interact(local=locals())
 
         for neighbour in current.neighbours:
             if neighbour != None:
