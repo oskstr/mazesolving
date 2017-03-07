@@ -35,8 +35,3 @@ This was just a side project I did for fun over a couple of evenings, I'm sure t
 - The current format of the test mazes (short paths, very dense) means that in fact dijkstra and a* usually operate more slowly than simple algorithms. In these cases Dijkstra usually performs the same function as breadth first search, but with more computational overhead. There will be some forms of maze where they are significantly faster.
 - Mazes don't need to be square - as long as they are surrounded by black walls. The input image will obviously be square.
 - Large areas of white, using my algorithm, will essentially degenerate into an inefficient flood fill - avoid!
-
-<<<<<<< HEAD
-- Regarding pull requests and issue tracking. I'm not actively developing this project over the long term. Mostly I want the code to be as it was (at least in general function) at the time of the video. I've accepted some obvious improvements already from people, but if you're looking to add a pull request because you've added to or altered the functionality in a big way, I'd prefer you avoided that.
-=======
->>>>>>> e81d36ba767e2bcbe85e1e916c7154ac453466d5
