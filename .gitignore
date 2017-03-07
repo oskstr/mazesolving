@@ -1,8 +1,7 @@
 /__pycache__
 
-# Bytecode and output image
+# Bytecode
 *.pyc
-/out.png
 
 # Text editor temp files
 *~
