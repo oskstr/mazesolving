@@ -14,6 +14,17 @@ Some example mazes are included in the repository. These were generated either b
 - One white square exists on the top row of the image, and is the start of the maze.
 - One white square exists on the bottom row of the image, and is the end of the maze.
 
+## Examples
+Solve the maze perfect2k.png with a depth-first search and output it as perfect2k.solved.png.
+### Linux and macOS
+```bash
+python solve.py -m depthfirst ./examples/perfect2k.png ./examples/perfect2k.solved.png
+```
+### Windows
+```
+python solve.py -m depthfirst .\examples\perfect2k.png .\examples\perfect2k.solved.png
+```
+
 ## Notes
 This was just a side project I did for fun over a couple of evenings, I'm sure there are many improvements and extensions you could make if you wanted to. Some things to note:
 
@@ -24,4 +35,3 @@ This was just a side project I did for fun over a couple of evenings, I'm sure t
 - Large areas of white, using my algorithm, will essentially degenerate into an inefficient flood fill - avoid!
 
 - Regarding pull requests and issue tracking. I'm not actively developing this project over the long term. Mostly I want the code to be as it was (at least in general function) at the time of the video. I've accepted some obvious improvements already from people, but if you're looking to add a pull request because you've added to or altered the functionality in a big way, I'd prefer you avoided that.
-
