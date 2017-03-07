@@ -47,12 +47,12 @@ class FibHeap(object):
         def removechild(self, node):
             """ Method docstring placeholder """
             if node.parent != self:
-                raise AssertionError("Cannot remove child from", \
+                raise AssertionError("Cannot remove child from ", \
                                      "a node that is not its parent")
 
             if node.issingle():
                 if self.child != node:
-                    raise AssertionError("Cannot remove a node", \
+                    raise AssertionError("Cannot remove a node ", \
                                          "that is not a child")
                 self.child = None
             else:
