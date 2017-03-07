@@ -1,8 +1,9 @@
-""" Create and save the output image.
+"""Create and save the output image.
+
 This is simple drawing code that travels between each node in turn,
 drawing either a horizontal or vertical line as required.
 Line colour is roughly interpolated between blue and red depending
-on how far down the path this section is. """
+on how far down the path this section is."""
 
 # pylint: disable=C0325, E1101
 
@@ -15,8 +16,14 @@ from factory import SolverFactory
 import argparse
 
 def solve(factory, method, input_file, output_file):
-    """ Solves as maze.
-    Finds a path for a maze from top to bottom."""
+    """Find a path through a maze.
+
+    Args:
+        factory (obj): Object of factory class that provides solver.
+        method (str): Method of solution e.g. "dijkstra".
+        input_file (file): Image file of maze to solve.
+        output_file (file): Image file of maze with solution if one is found.
+    """
     # Load Image
     print("Loading Image")
     image = Image.open(input_file)
@@ -78,8 +85,10 @@ def solve(factory, method, input_file, output_file):
 
 
 def main():
-    """ Parses arguments of solve.py and chooses method.
-    Breath-first by default. """
+    """Parse arguments of solve.py and choose method.
+
+    Breadth-first by default."""
+
     sf = SolverFactory()
     parser = argparse.ArgumentParser()
     parser.add_argument("-m", "--method", nargs='?', const=sf.default,

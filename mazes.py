@@ -8,7 +8,7 @@ class Maze(object):
         def __init__(self, position):
             self.position = position
             self.neighbours = [None, None, None, None]
-            #self.Weights = [0, 0, 0, 0]
+            #self.weights = [0, 0, 0, 0]
 
     def __init__(self, im):
         width = im.size[0]
