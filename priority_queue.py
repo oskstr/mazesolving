@@ -127,4 +127,3 @@ class QueuePQ(PriorityQueue):
         self.remove(node)
         node.key = new_priority
         self.insert(node)
-

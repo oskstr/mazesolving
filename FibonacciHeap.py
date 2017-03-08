@@ -165,12 +165,13 @@ class FibHeap(object):
         newmaxdegree = 0
         for degree in range(0, logsize):
             if degreeroots[degree] != None:
-                degreeroots[degree].next = degreeroots[degree].previous = degreeroots[degree]
+                degreeroots[degree].next = degreeroots[degree].previous \
+                                           = degreeroots[degree]
                 self._insertnode(degreeroots[degree])
                 if degree > newmaxdegree:
                     newmaxdegree = degree
 
-        maxdegree = newmaxdegree
+        maxdegree = newmaxdegree # Unused variable
 
         return removed_node
 

@@ -12,7 +12,7 @@ def solve(maze):
     total = maze.width * maze.height
 
     start = maze.start
-    startpos = start.position # Unused variable?
+    startpos = start.position
     end = maze.end
     endpos = end.position
 
@@ -22,7 +22,8 @@ def solve(maze):
     infinity = float("inf")
     distances = [infinity] * total
 
-    # The priority queue. There are multiple implementations in priority_queue.py
+    # The priority queue.
+    # There are multiple implementations in priority_queue.py
     # unvisited = FibHeap()
     unvisited = HeapPQ()
     # unvisited = FibPQ()
@@ -30,9 +31,9 @@ def solve(maze):
 
     nodeindex = [None] * total
 
-    distances[start.position[0] * width + start.position[1]] = 0
+    distances[startpos[0] * width + startpos[1]] = 0
     startnode = FibHeap.Node(0, start)
-    nodeindex[start.position[0] * width + start.position[1]] = startnode
+    nodeindex[startpos[0] * width + startpos[1]] = startnode
     unvisited.insert(startnode)
 
     count = 0
@@ -91,13 +92,18 @@ def solve(maze):
                             vnode = FibHeap.Node(newdistance + remaining, v)
                             unvisited.insert(vnode)
                             nodeindex[vposindex] = vnode
-                            # The distance *to* the node remains just g, no f included.
+                            # The distance *to* the node remains just g,
+                            # no f included.
                             distances[vposindex] = newdistance
                             prev[vposindex] = u
                         else:
-                            # As above, we decrease the node since we've found a new path. But we include the f cost, the distance remaining.
-                            unvisited.decreasekey(vnode, newdistance + remaining)
-                            # The distance *to* the node remains just g, no f included.
+                            # As above, we decrease the node since we've
+                            # found a new path. But we include the f cost,
+                            # the distance remaining.
+                            unvisited.decreasekey(vnode,\
+                                                  newdistance + remaining)
+                            # The distance *to* the node remains
+                            # just g, no f included.
                             distances[vposindex] = newdistance
                             prev[vposindex] = u
 

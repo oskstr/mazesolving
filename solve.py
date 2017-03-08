@@ -5,7 +5,7 @@ drawing either a horizontal or vertical line as required.
 Line colour is roughly interpolated between blue and red depending
 on how far down the path this section is."""
 
-# pylint: disable=C0325, E1101
+# pylint: disable=C0325
 
 from PIL import Image
 import time
@@ -22,7 +22,7 @@ def solve(factory, method, input_file, output_file):
         factory (obj): Object of factory class that provides solver.
         method (str): Method of solution e.g. "dijkstra".
         input_file (file): Image file of maze to solve.
-        output_file (file): Image file of maze with solution if one is found.
+        output_file (str): Name of file for maze with solution if one is found.
     """
     # Load Image
     print("Loading Image")

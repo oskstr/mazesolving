@@ -1,10 +1,10 @@
-""" Creates a maze object with a map of nodes
-    in all corners and junctions. """
+"""Create a maze object with a map of nodes
+   in all corners and junctions."""
 class Maze(object):
-    """ Imports image and creates a map with
-        with nodes in all corners and junctions. """
+    """Import image and creates a map with
+       with nodes in all corners and junctions."""
     class Node(object):
-        """ Creates a new node. """
+        """Create a new node."""
         def __init__(self, position):
             self.position = position
             self.neighbours = [None, None, None, None]

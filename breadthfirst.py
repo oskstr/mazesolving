@@ -1,9 +1,9 @@
-""" Module docstring placeholder """
+"""Module docstring placeholder"""
 
 from collections import deque
 
 def solve(maze):
-    """ Function docstring placeholder """
+    """Function docstring placeholder"""
     start = maze.start
     end = maze.end
 
